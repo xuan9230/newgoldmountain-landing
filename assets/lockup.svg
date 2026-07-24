@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 64" width="264" height="64">
+  <!-- New Gold Mountain 新金山 — horizontal lockup, paper/light backgrounds.
+       Note: hanzi and Latin are live <text>; renders with Songti SC / system serif. Outline before print use. -->
+  <g transform="translate(0,8) scale(0.75)">
+    <path fill="#1e1b16" d="M9 28 L16 25 L16 54 L9 54 Z M48 25 L55 28 L55 54 L48 54 Z M9 49 L55 49 L57 54 L7 54 Z"/>
+    <path fill="#8a6d1f" d="M30.5 9 Q26 33 19.5 49 L32.5 49 Z"/>
+    <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
+  </g>
+  <text x="62" y="36" font-family="Songti SC, STSong, SimSun, serif" font-weight="600" font-size="30" letter-spacing="4" fill="#1e1b16">新金山</text>
+  <text x="63" y="54" font-family="Avenir Next, Helvetica Neue, sans-serif" font-weight="500" font-size="9.5" letter-spacing="3.4" fill="#55503f">NEW GOLD MOUNTAIN</text>
+</svg>

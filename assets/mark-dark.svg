@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- New Gold Mountain 新金山 — mark for dark backgrounds (frame in paper). -->
+  <path fill="#f7f3ea" d="M9 28 L16 25 L16 54 L9 54 Z M48 25 L55 28 L55 54 L48 54 Z M9 49 L55 49 L57 54 L7 54 Z"/>
+  <path fill="#8a6d1f" d="M30.5 9 Q26 33 19.5 49 L32.5 49 Z"/>
+  <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
+</svg>
