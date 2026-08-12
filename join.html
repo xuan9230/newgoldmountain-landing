@@ -327,13 +327,13 @@
 
 <script>
   /* ------------------------------------------------------------------
-     Supabase config — replace both values with your project's.
-     Dashboard → Project Settings → API
-     The anon key is safe to expose: the table's RLS policy allows
-     INSERT only, so nobody can read the member list with it.
+     Supabase config. The publishable key is meant to be public: the
+     members table grants the anon role INSERT and nothing else, so this
+     key can add a signup but can never read the member list back out.
+     Schema and policies live in supabase/schema.sql.
   ------------------------------------------------------------------ */
-  const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-  const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+  const SUPABASE_URL = 'https://wzmnyrlpjdlkdpidicmg.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_vsMDWt6WzHfkdTeSQOYoOA_7umaXGwF';
 
   const TABLE = 'members';
 

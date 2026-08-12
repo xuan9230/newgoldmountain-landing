@@ -11,66 +11,65 @@ signup form. Deployed on Vercel.
 python3 -m http.server 4173
 ```
 
-## Signup form setup (Supabase)
+## Signup form (Supabase)
 
-The join form writes to a Supabase table directly from the browser.
+`join.html` inserts straight into Supabase from the browser — no backend, no
+build step. The schema lives in [`supabase/schema.sql`](supabase/schema.sql)
+and is already applied to the live project.
 
-### 1. Create the table
+### Security model
 
-Supabase dashboard → SQL Editor → run:
+The publishable key sits in `join.html` in plain sight, which is fine by
+design. RLS gives the `anon` role exactly two capabilities:
 
-```sql
-create table public.members (
-  id         uuid primary key default gen_random_uuid(),
-  name       text not null,
-  email      text not null unique,
-  bio        text,
-  created_at timestamptz not null default now()
-);
+- `INSERT` on `members` — signups go in
+- `EXECUTE` on `heartbeat()` — the cron ping
 
-alter table public.members enable row level security;
+No select, update, or delete. Verified behaviour of the public key:
 
--- anon may insert, and only insert — the member list is never readable
--- with the public key
-grant insert on table public.members to anon;
+| Request                     | Result             |
+| --------------------------- | ------------------ |
+| insert a signup             | `201`              |
+| read the member list        | `401` permission denied |
+| duplicate email (any case)  | `409`              |
+| delete a row                | `401`              |
 
-create policy "anyone can join"
-  on public.members
-  for insert
-  to anon
-  with check (true);
+Reading the member list requires the dashboard or the database password.
+
+### Re-applying the schema
+
+```bash
+set -a && . ./.env && set +a
+psql "$DATABASE_URL" -f supabase/schema.sql
 ```
 
-### 2. Point the form at the project
+It's idempotent. Note the dashboard's *direct* connection string is IPv6-only;
+`DATABASE_URL` in `.env` uses the session pooler, which works over IPv4.
 
-In `join.html`, replace the two placeholders near the bottom:
-
-```js
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
-```
-
-Both come from Project Settings → API. The anon key is safe in client-side
-code: the policy above grants insert only, so it cannot read the member list.
-
-### 3. Keep the database awake
+### Keeping the database awake
 
 Supabase pauses free projects after 7 days without database activity, which
-would break the form. `api/keepalive.js` runs daily via `vercel.json` to
-prevent that. Set these in Vercel → Settings → Environment Variables:
+would silently break the form. `api/keepalive.mjs` runs daily via
+`vercel.json` and calls `heartbeat()`. Set in Vercel → Settings →
+Environment Variables:
 
-| Variable               | Value                                         |
-| ---------------------- | --------------------------------------------- |
-| `SUPABASE_URL`         | `https://YOUR-PROJECT.supabase.co`            |
-| `SUPABASE_SERVICE_KEY` | the `service_role` key (server-side only)     |
-| `CRON_SECRET`          | any random string (optional, recommended)     |
+| Variable                   | Value                              |
+| -------------------------- | ---------------------------------- |
+| `SUPABASE_URL`             | `https://wzmnyrlpjdlkdpidicmg.supabase.co` |
+| `SUPABASE_PUBLISHABLE_KEY` | the `sb_publishable_...` key       |
+| `CRON_SECRET`              | any random string (optional)       |
 
-Verify it works after deploying: `curl https://YOUR-SITE/api/keepalive`
-(returns `{"ok":true,...}` when `CRON_SECRET` is unset).
+Check after deploying: `curl https://YOUR-SITE/api/keepalive` → `{"ok":true,...}`
+(when `CRON_SECRET` is unset).
 
 ## Reading signups
 
-Supabase dashboard → Table Editor → `members`. Export to CSV from there.
+Supabase dashboard → Table Editor → `members`, or:
+
+```bash
+set -a && . ./.env && set +a
+psql "$DATABASE_URL" -c "select name, email, bio, created_at from members order by created_at desc;"
+```
 
 ## Assets
 
