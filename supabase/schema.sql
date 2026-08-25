@@ -62,14 +62,47 @@ create policy "anyone can join"
 -- Heartbeat
 --
 -- Supabase pauses free projects after 7 days without database activity, which
--- would silently break the signup form. api/keepalive.js calls this daily.
--- It runs a real query in Postgres but touches no data, so the publishable key
--- is enough — no secret key needs to exist anywhere in the deployment.
+-- would silently break the signup form. api/keepalive.mjs calls this daily.
+--
+-- It records every ping in a singleton row, so "is the cron actually firing?"
+-- is answerable after the fact:
+--
+--   select * from public.heartbeat;
+--
+-- A write (not just a read) is deliberate: it is unambiguous database
+-- activity, and it leaves the audit trail.
+--
+-- SECURITY DEFINER so the anon role can run it without holding any table
+-- privileges of its own; search_path is pinned per Postgres guidance.
 -- ---------------------------------------------------------------------------
+create table if not exists public.heartbeat (
+  id         int primary key default 1,
+  last_ping  timestamptz not null default now(),
+  ping_count bigint      not null default 0,
+  constraint heartbeat_singleton check (id = 1)
+);
+
+insert into public.heartbeat (id) values (1) on conflict (id) do nothing;
+
+alter table public.heartbeat enable row level security;
+revoke all on table public.heartbeat from anon, authenticated;
+
 create or replace function public.heartbeat()
   returns timestamptz
-  language sql
-  volatile
-as $$ select now() $$;
+  language plpgsql
+  security definer
+  set search_path = public, pg_temp
+as $$
+declare
+  t timestamptz;
+begin
+  update public.heartbeat
+     set last_ping = now(), ping_count = ping_count + 1
+   where id = 1
+  returning last_ping into t;
+  return t;
+end
+$$;
 
+revoke all on function public.heartbeat() from public;
 grant execute on function public.heartbeat() to anon;

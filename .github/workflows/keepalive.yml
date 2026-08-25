@@ -1,0 +1,38 @@
+# Second, independent keep-alive.
+#
+# Vercel's docs say Hobby-plan cron jobs are not assured to fire on time, and
+# a missed week means Supabase pauses the project and the signup form breaks
+# silently. This pings Supabase directly — no dependency on Vercel — roughly
+# 12 hours offset from the Vercel cron, so either one alone is enough.
+#
+# The key below is the publishable key, which already ships in join.html.
+# It can only call heartbeat() and insert signups; it cannot read anything.
+#
+# Caveat: GitHub disables scheduled workflows on public repos after 60 days
+# with no repository activity. Re-enable from the Actions tab if that happens.
+
+name: keepalive
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase heartbeat
+        env:
+          SUPABASE_URL: https://wzmnyrlpjdlkdpidicmg.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_vsMDWt6WzHfkdTeSQOYoOA_7umaXGwF
+        run: |
+          set -euo pipefail
+          code=$(curl -sS --max-time 30 -o /tmp/hb.json -w '%{http_code}' \
+            -X POST "$SUPABASE_URL/rest/v1/rpc/heartbeat" \
+            -H "apikey: $SUPABASE_PUBLISHABLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_PUBLISHABLE_KEY" \
+            -H 'Content-Type: application/json' \
+            -d '{}')
+          echo "HTTP $code — $(cat /tmp/hb.json)"
+          test "$code" = "200"
