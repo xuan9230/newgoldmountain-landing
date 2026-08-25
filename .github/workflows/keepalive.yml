@@ -1,9 +1,13 @@
 # Second, independent keep-alive.
 #
-# Vercel's docs say Hobby-plan cron jobs are not assured to fire on time, and
-# a missed week means Supabase pauses the project and the signup form breaks
-# silently. This pings Supabase directly — no dependency on Vercel — roughly
-# 12 hours offset from the Vercel cron, so either one alone is enough.
+# The Vercel cron alone did not keep the project alive: Supabase flagged it
+# for 7+ days of insufficient activity on 2026-08-25. Vercel's docs say
+# Hobby-plan crons are not assured to fire, and the project lives under a
+# Vercel account we cannot inspect, so its cron cannot be verified from here.
+#
+# This pings Supabase directly, with no dependency on Vercel. It runs every
+# 8 hours rather than daily: GitHub delays or drops scheduled runs under load,
+# so three chances a day means ~21 chances inside any 7-day pause window.
 #
 # The key below is the publishable key, which already ships in join.html.
 # It can only call heartbeat() and insert signups; it cannot read anything.
@@ -15,7 +19,7 @@ name: keepalive
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 */8 * * *'
   workflow_dispatch:
 
 jobs:
