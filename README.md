@@ -5,11 +5,18 @@ Landing page and join form for the New Gold Mountain community.
 Static HTML, no build step. `index.html` is the landing page, `join.html` is the
 signup form. Deployed on Vercel.
 
+`cleanUrls` is on, so the pages are served at `/` and `/join` — the `.html`
+URLs 308-redirect to those, which keeps any link shared earlier working.
+
 ## Local preview
 
 ```bash
-python3 -m http.server 4173
+python3 scripts/serve.py 4173
 ```
+
+Stock `http.server` would 404 on `/join`, since the extensionless paths only
+exist in production; `scripts/serve.py` resolves them the way Vercel does so
+local and production behave the same.
 
 ## Signup form (Supabase)
 
