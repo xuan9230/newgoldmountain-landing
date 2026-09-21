@@ -153,6 +153,44 @@
   }
   .field.invalid .field-error { display: block; }
 
+  /* guidance under a field — always visible, unlike .field-error */
+  .field-note {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 0.45rem;
+    opacity: 0.8;
+  }
+
+  /* "did you mean gmail.com?" — a suggestion, never a blocker */
+  .field-hint {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--gold-deep);
+    margin-top: 0.45rem;
+  }
+  .suggest-btn {
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold);
+    padding: 0 0.1rem;
+    margin: 0 0.15rem;
+    cursor: pointer;
+  }
+  .suggest-btn:hover { background: rgba(176, 141, 47, 0.12); }
+
+  .counter {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 0.35rem;
+    text-align: right;
+    opacity: 0.7;
+  }
+  .counter.short { color: var(--gold-deep); opacity: 1; }
+
   /* honeypot — hidden from humans, tempting to bots */
   .hp {
     position: absolute;
@@ -245,8 +283,8 @@
       <span class="zh">来入座。</span>
     </h1>
     <p class="intro">
-      <span class="en">Leave your details and we'll be in touch when the next salon comes around. No newsletter, no drip campaign — just an invitation when there's a table.</span>
-      <span class="zh">留下联系方式，下次沙龙我们会提前联系你。不群发，不打扰——有位置的时候给你发个邀请。</span>
+      <span class="en">Salons are small — usually one long table — so we read every submission and invite people as seats open up. Tell us enough that we can place you well. No newsletter, no drip campaign.</span>
+      <span class="zh">沙龙规模很小——通常就一张长桌——所以每一份报名我们都会认真看，有位置的时候发出邀请。多写几句，方便我们把你安排到合适的场次。不群发，不打扰。</span>
     </p>
 
     <form id="join-form" novalidate>
@@ -272,16 +310,46 @@
           <span class="en">That email doesn't look right.</span>
           <span class="zh">邮箱格式好像不太对。</span>
         </div>
+        <div class="field-hint" id="email-suggest" hidden>
+          <span class="en">Did you mean</span><span class="zh">你是想输入</span>
+          <button type="button" class="suggest-btn" id="email-suggest-btn"></button><span class="zh">吗</span><span class="en">?</span>
+        </div>
+      </div>
+
+      <div class="field" id="f-linkedin">
+        <label for="linkedin">
+          <span class="en">LinkedIn</span>
+          <span class="zh">LinkedIn 主页</span>
+        </label>
+        <input type="url" id="linkedin" name="linkedin" maxlength="200" inputmode="url"
+          placeholder="linkedin.com/in/your-profile" required>
+        <div class="field-note">
+          <span class="en">Salons are invite-only, so this is how we get to know who's coming.</span>
+          <span class="zh">沙龙是邀请制的，这是我们了解来的人的方式。</span>
+        </div>
+        <div class="field-error">
+          <span class="en">Please give a LinkedIn profile URL, e.g. linkedin.com/in/your-profile</span>
+          <span class="zh">请填写 LinkedIn 个人主页链接，例如 linkedin.com/in/your-profile</span>
+        </div>
       </div>
 
       <div class="field" id="f-bio">
         <label for="bio">
-          <span class="en">A line about you <span class="opt">(optional)</span></span>
-          <span class="zh">一句话介绍 <span class="opt">（选填）</span></span>
+          <span class="en">About you</span>
+          <span class="zh">关于你</span>
         </label>
-        <textarea id="bio" name="bio" maxlength="500" rows="3"
-          data-ph-en="What you're building, or what you're curious about."
-          data-ph-zh="在做什么，或者对什么感兴趣。"></textarea>
+        <textarea id="bio" name="bio" maxlength="2000" rows="6" required
+          data-ph-en="What you're building or investing in, where you're based, and what you'd want out of a room like this. A few sentences is plenty."
+          data-ph-zh="你在做什么或在投什么，常驻哪里，以及你希望从这样一个场合里收获什么。几句话就够。"></textarea>
+        <div class="field-note">
+          <span class="en">We read these properly — it's how we decide which table you'd get the most out of.</span>
+          <span class="zh">这部分我们会认真读——它决定把你安排到哪一桌最合适。</span>
+        </div>
+        <div class="counter" id="bio-counter"></div>
+        <div class="field-error">
+          <span class="en">A couple of sentences, so we have something to go on.</span>
+          <span class="zh">写上两三句，我们才有判断的依据。</span>
+        </div>
       </div>
 
       <!-- honeypot -->
@@ -291,8 +359,8 @@
       </div>
 
       <button type="submit" class="btn" id="submit-btn">
-        <span class="en">Join the list</span>
-        <span class="zh">加入名单</span>
+        <span class="en">Request an invite</span>
+        <span class="zh">申请加入</span>
       </button>
 
       <div class="form-status" id="status" role="alert" aria-live="polite"></div>
@@ -306,12 +374,12 @@
       <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
     </svg>
     <h1>
-      <span class="en">You're on the list.</span>
-      <span class="zh">已经记下了。</span>
+      <span class="en">Got it — thank you.</span>
+      <span class="zh">收到了，谢谢。</span>
     </h1>
     <p class="intro">
-      <span class="en">We'll be in touch before the next salon. In the meantime, if you'd rather just say hello directly — <a href="mailto:stan.xuan.luo@gmail.com?subject=New%20Gold%20Mountain" style="color:var(--gold-deep)">stan.xuan.luo@gmail.com</a>.</span>
-      <span class="zh">下次沙龙前我们会联系你。想直接聊聊的话 — <a href="mailto:stan.xuan.luo@gmail.com?subject=New%20Gold%20Mountain" style="color:var(--gold-deep)">stan.xuan.luo@gmail.com</a>。</span>
+      <span class="en">A real person reads every one of these. When there's a table that fits, you'll hear from us. If you'd rather just say hello directly — <a href="mailto:stan.xuan.luo@gmail.com?subject=New%20Gold%20Mountain" style="color:var(--gold-deep)">stan.xuan.luo@gmail.com</a>.</span>
+      <span class="zh">每一份都会有人认真看。有合适的场次时我们会联系你。想直接聊聊的话 — <a href="mailto:stan.xuan.luo@gmail.com?subject=New%20Gold%20Mountain" style="color:var(--gold-deep)">stan.xuan.luo@gmail.com</a>。</span>
     </p>
     <a class="back" href="index.html">
       <span class="en">← Back to the start</span>
@@ -346,6 +414,7 @@
     document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
     var bio = document.getElementById('bio');
     bio.placeholder = lang === 'zh' ? bio.dataset.phZh : bio.dataset.phEn;
+    if (typeof refreshCounter === 'function') refreshCounter();
     try { localStorage.setItem('ngm-lang', lang); } catch (e) {}
   }
   (function () {
@@ -358,17 +427,135 @@
   function isZh() { return document.body.classList.contains('lang-zh'); }
 
   /* ---- validation ---- */
-  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function validEmail(v) {
+    // Deliberately not RFC-complete: catches the realistic mistakes (missing
+    // @, missing dot, stray spaces, bare TLD) without rejecting valid oddities.
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(v)) return false;
+    if (v.indexOf('..') !== -1) return false;
+    return true;
+  }
+
+  /* Common-domain typo detection.
+     A real signup was lost to "gmai.com", so instead of hardcoding that one
+     case we measure edit distance against the providers people actually use.
+     Distance 1–2 with a different string means "probably a slip" — we offer a
+     correction but never block, since plenty of legitimate domains are close
+     to these (e.g. gmx.com). */
+  const COMMON_DOMAINS = [
+    'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com',
+    'yahoo.com', 'yahoo.com.au', 'icloud.com', 'me.com', 'proton.me',
+    'protonmail.com', 'qq.com', '163.com', '126.com', 'foxmail.com',
+    'bigpond.com', 'optusnet.com.au', 'iinet.net.au'
+  ];
+
+  function editDistance(a, b) {
+    const m = a.length, n = b.length;
+    let prev = new Array(n + 1);
+    for (let j = 0; j <= n; j++) prev[j] = j;
+    for (let i = 1; i <= m; i++) {
+      const cur = [i];
+      for (let j = 1; j <= n; j++) {
+        cur[j] = Math.min(
+          prev[j] + 1,
+          cur[j - 1] + 1,
+          prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+        );
+      }
+      prev = cur;
+    }
+    return prev[n];
+  }
+
+  function suggestDomain(email) {
+    const at = email.lastIndexOf('@');
+    if (at < 1) return null;
+    const domain = email.slice(at + 1).toLowerCase();
+    if (!domain || COMMON_DOMAINS.indexOf(domain) !== -1) return null;
+    let best = null, bestD = Infinity;
+    for (const d of COMMON_DOMAINS) {
+      const dist = editDistance(domain, d);
+      if (dist < bestD) { bestD = dist; best = d; }
+    }
+    // Short domains need a tighter threshold or everything looks like a typo.
+    const limit = domain.length <= 6 ? 1 : 2;
+    return bestD > 0 && bestD <= limit ? email.slice(0, at + 1) + best : null;
+  }
+
+  /* LinkedIn: accept whatever people paste — with or without protocol, www,
+     trailing slash, tracking params, or a mobile/locale host — and store one
+     canonical form so the saved value is always clickable. */
+  function normaliseLinkedIn(raw) {
+    let v = raw.trim();
+    if (!v) return null;
+    v = v.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+    v = v.split('?')[0].split('#')[0];
+    const m = v.match(/^([a-z]{2,3}\.)?(m\.)?linkedin\.com\/in\/([^/\s]+)\/?$/i);
+    if (!m) return null;
+    let slug = m[3];
+    try { slug = encodeURIComponent(decodeURIComponent(slug)); } catch (e) { return null; }
+    if (!/^[A-Za-z0-9%._~-]{1,100}$/.test(slug)) return null;
+    return 'https://www.linkedin.com/in/' + slug;
+  }
+
+  const BIO_MIN = 40;
 
   function setInvalid(id, bad) {
     document.getElementById(id).classList.toggle('invalid', bad);
   }
 
-  ['name', 'email'].forEach(function (id) {
+  ['name', 'email', 'linkedin', 'bio'].forEach(function (id) {
     document.getElementById(id).addEventListener('input', function () {
       setInvalid('f-' + id, false);
     });
   });
+
+  /* ---- email typo suggestion ---- */
+  const emailEl = document.getElementById('email');
+  const suggestBox = document.getElementById('email-suggest');
+  const suggestBtn = document.getElementById('email-suggest-btn');
+
+  function refreshSuggestion() {
+    const v = emailEl.value.trim();
+    const s = validEmail(v) ? suggestDomain(v) : null;
+    if (s) {
+      suggestBtn.textContent = s;
+      suggestBox.hidden = false;
+    } else {
+      suggestBox.hidden = true;
+    }
+  }
+  emailEl.addEventListener('blur', refreshSuggestion);
+  emailEl.addEventListener('input', function () { suggestBox.hidden = true; });
+  suggestBtn.addEventListener('click', function () {
+    emailEl.value = suggestBtn.textContent;
+    suggestBox.hidden = true;
+    setInvalid('f-email', false);
+  });
+
+  /* ---- bio counter ---- */
+  const bioEl = document.getElementById('bio');
+
+  // Looks its own elements up rather than closing over bioEl/counterEl: setLang
+  // runs during init and calls this, which would otherwise hit those consts
+  // while they are still in their temporal dead zone.
+  function refreshCounter() {
+    const bio = document.getElementById('bio');
+    const counterEl = document.getElementById('bio-counter');
+    if (!bio || !counterEl) return;
+    const n = bio.value.trim().length;
+    const short = n > 0 && n < BIO_MIN;
+    counterEl.classList.toggle('short', short);
+    if (n === 0) {
+      counterEl.textContent = '';
+    } else if (short) {
+      counterEl.textContent = isZh()
+        ? '还差 ' + (BIO_MIN - n) + ' 个字'
+        : (BIO_MIN - n) + ' more characters';
+    } else {
+      counterEl.textContent = n + (isZh() ? ' 字' : ' characters');
+    }
+  }
+  bioEl.addEventListener('input', refreshCounter);
 
   /* ---- submit ---- */
   const form = document.getElementById('join-form');
@@ -387,12 +574,23 @@
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const bio = document.getElementById('bio').value.trim();
+    const linkedin = normaliseLinkedIn(document.getElementById('linkedin').value);
     const trap = document.getElementById('company').value;
 
-    let bad = false;
-    if (!name) { setInvalid('f-name', true); bad = true; }
-    if (!validEmail(email)) { setInvalid('f-email', true); bad = true; }
-    if (bad) return;
+    let bad = false, firstBad = null;
+    function fail(id) { setInvalid(id, true); bad = true; if (!firstBad) firstBad = id; }
+
+    if (!name) fail('f-name');
+    if (!validEmail(email)) fail('f-email');
+    if (!linkedin) fail('f-linkedin');
+    if (bio.length < BIO_MIN) fail('f-bio');
+
+    if (bad) {
+      // Surface a likely typo at the same time as the errors, not after.
+      refreshSuggestion();
+      document.getElementById(firstBad).scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return;
+    }
 
     // bot filled the honeypot — pretend it worked, save nothing
     if (trap) { document.body.classList.add('done'); return; }
@@ -417,7 +615,7 @@
           'Content-Type': 'application/json',
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({ name: name, email: email, bio: bio || null })
+        body: JSON.stringify({ name: name, email: email, bio: bio, linkedin: linkedin })
       });
 
       if (res.ok) {
@@ -442,7 +640,7 @@
       );
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<span class="en">Join the list</span><span class="zh">加入名单</span>';
+      submitBtn.innerHTML = '<span class="en">Request an invite</span><span class="zh">申请加入</span>';
     }
   });
 </script>

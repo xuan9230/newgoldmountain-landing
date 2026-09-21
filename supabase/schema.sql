@@ -12,28 +12,39 @@ create table if not exists public.members (
   created_at timestamptz not null default now()
 );
 
+-- LinkedIn profile. The form requires it — salons are invite-only, so a
+-- profile is how a signup gets vetted. Nullable in the database on purpose:
+-- the two people who joined before this field existed genuinely have none
+-- recorded, and backfilling a placeholder would be worse than a null.
+alter table public.members add column if not exists linkedin text;
+
 -- Case-insensitive uniqueness: Stan@x.com and stan@x.com are the same person.
 -- A duplicate signup surfaces as HTTP 409, which join.html treats as success.
 create unique index if not exists members_email_lower_idx
   on public.members (lower(email));
 
--- Length limits mirror the maxlength attributes in join.html. The form is
--- public, so the database enforces them too rather than trusting the client.
-do $$
-begin
-  if not exists (select 1 from pg_constraint where conname = 'members_name_len') then
-    alter table public.members
-      add constraint members_name_len check (char_length(name) between 1 and 80);
-  end if;
-  if not exists (select 1 from pg_constraint where conname = 'members_email_len') then
-    alter table public.members
-      add constraint members_email_len check (char_length(email) between 3 and 160);
-  end if;
-  if not exists (select 1 from pg_constraint where conname = 'members_bio_len') then
-    alter table public.members
-      add constraint members_bio_len check (bio is null or char_length(bio) <= 500);
-  end if;
-end $$;
+-- Length and shape limits mirror join.html's own validation. The endpoint is
+-- public, so the database enforces them rather than trusting the client.
+-- Dropped and recreated so this block stays re-runnable as limits change.
+alter table public.members drop constraint if exists members_name_len;
+alter table public.members drop constraint if exists members_email_len;
+alter table public.members drop constraint if exists members_bio_len;
+alter table public.members drop constraint if exists members_linkedin_shape;
+
+alter table public.members
+  add constraint members_name_len
+    check (char_length(name) between 1 and 80),
+  add constraint members_email_len
+    check (char_length(email) between 3 and 160),
+  -- bio was optional and capped at 500; it is now required by the form and
+  -- meant to carry enough for a human to judge fit, hence the bigger ceiling.
+  add constraint members_bio_len
+    check (bio is null or char_length(bio) between 1 and 2000),
+  -- join.html normalises whatever is pasted to this canonical form, so the
+  -- stored value is always directly clickable.
+  add constraint members_linkedin_shape
+    check (linkedin is null
+           or linkedin ~ '^https://www\.linkedin\.com/in/[A-Za-z0-9%._~-]{1,100}$');
 
 -- ---------------------------------------------------------------------------
 -- Row Level Security
