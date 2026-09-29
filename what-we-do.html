@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What We Do 我们做什么 — New Gold Mountain 新金山</title>
-<meta name="description" content="New Gold Mountain (新金山): founder salons, introductions between founders and investors, and partner events that bridge China and Australia's startup ecosystem.">
+<meta name="description" content="New Gold Mountain (新金山): monthly founder salons, introductions between founders and investors, founder bootcamps, and the China–Australia corridor.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <style>
   :root {
@@ -95,8 +95,7 @@
   /* ---- sections ---- */
   section { padding: 4.5rem 0; }
   section + section { border-top: 1px solid var(--line); }
-  .intro { padding: 3.5rem 0 3rem; }
-  #services { padding: 3rem 0; }
+  .intro { padding: 3.5rem 0 4rem; }
 
   .kicker {
     font-family: var(--sans);
@@ -118,103 +117,128 @@
     line-height: 1.35;
     margin-bottom: 1.4rem;
   }
-  h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 0.8rem;
-  }
   p { margin-bottom: 1.1rem; color: var(--ink); }
   p:last-child { margin-bottom: 0; }
   .muted { color: var(--ink-soft); }
   .lede { font-size: 1.08rem; }
 
-  .more {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--gold-deep);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-  }
-  .more:hover { border-bottom-color: var(--gold-deep); }
-
-  /* ---- the three things we do ---- */
-  .pillar {
+  /* ---- overview: the four things we do ---- */
+  .overview {
     display: grid;
-    grid-template-columns: 3.4rem 1fr;
-    column-gap: 1.2rem;
-    padding: 2.6rem 0;
-    border-top: 1px solid var(--line);
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2.6rem;
   }
-  .pillar:first-of-type { border-top: none; padding-top: 0.6rem; }
-  .pillar .num {
+  .overview .item {
+    border-top: 2px solid var(--gold);
+    padding-top: 1.1rem;
+  }
+  .overview .num {
     font-family: var(--serif-zh);
-    font-size: 2.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     line-height: 1;
     color: var(--gold);
-    padding-top: 0.15rem;
+    float: right;
   }
-  .pillar .label {
+  .overview .label {
     font-family: var(--sans);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold-deep);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
   }
-  .pillar ul { list-style: none; margin: 1.2rem 0 0; }
-  .pillar li {
-    position: relative;
-    padding-left: 1.3rem;
-    margin-bottom: 0.55rem;
-    color: var(--ink-soft);
-    font-size: 0.97rem;
+  .overview h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
   }
-  .pillar li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.85em;
-    width: 0.65rem;
-    height: 1px;
-    background: var(--gold);
-  }
-  .pillar li b { color: var(--ink); font-weight: 600; }
-  .pillar .more { display: inline-block; margin-top: 1.1rem; }
-
-  @media (max-width: 540px) {
-    .pillar { grid-template-columns: 1fr; }
-    .pillar .num { font-size: 2rem; margin-bottom: 0.8rem; }
+  .overview p { font-size: 0.95rem; color: var(--ink-soft); }
+  @media (max-width: 600px) {
+    .overview { grid-template-columns: 1fr; gap: 1.8rem; }
   }
 
-  /* ---- events ---- */
-  ul.events { list-style: none; margin-top: 2rem; }
-  ul.events li {
+  /* ---- recent work ---- */
+  ul.work { list-style: none; margin-top: 2.2rem; }
+  ul.work > li {
     display: grid;
     grid-template-columns: 8.5rem 1fr;
     column-gap: 1.4rem;
-    padding: 1.3rem 0;
+    padding: 1.6rem 0;
     border-top: 1px solid var(--line);
   }
-  ul.events li:last-child { border-bottom: 1px solid var(--line); }
-  ul.events .when {
+  ul.work > li:last-child { border-bottom: 1px solid var(--line); }
+  ul.work .when {
     font-family: var(--sans);
     font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    color: var(--gold-deep);
-    padding-top: 0.25rem;
-  }
-  ul.events .title { display: block; font-weight: 600; }
-  ul.events .note {
-    display: block;
+    letter-spacing: 0.04em;
     color: var(--ink-soft);
-    font-size: 0.95rem;
-    margin-top: 0.15rem;
+    padding-top: 0.2rem;
+  }
+  ul.work .tag {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  ul.work .title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 0.4rem;
+  }
+  ul.work p { font-size: 0.97rem; color: var(--ink-soft); }
+  /* optional photo: <img src="assets/work/…" alt="…" loading="lazy"> after the <p> */
+  ul.work img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border: 1px solid var(--line);
   }
   @media (max-width: 540px) {
-    ul.events li { grid-template-columns: 1fr; }
-    ul.events .when { padding-top: 0; margin-bottom: 0.2rem; }
+    ul.work > li { grid-template-columns: 1fr; }
+    ul.work .when { padding-top: 0; margin-bottom: 0.5rem; }
+    ul.work .tag { display: inline; margin: 0 0 0 0.6rem; }
+  }
+
+  /* ---- partners ---- */
+  .partner-groups {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .partner-groups .group-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .partner-groups ul { list-style: none; }
+  .partner-groups li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .partner-groups li small {
+    display: block;
+    font-family: var(--sans);
+    font-weight: normal;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 600px) {
+    .partner-groups { grid-template-columns: 1fr; }
   }
 
   /* ---- work with us ---- */
@@ -319,143 +343,146 @@
       <span class="en">New Gold Mountain is built on one thing: a network of Chinese founders, investors and operators in Australia that we know personally. Everything we do puts that network to work — for the people in it, for the investors who should meet them, and for partners in China looking for a way in.</span>
       <span class="zh">新金山的根基只有一样：一个我们亲自认识、亲自筛选过的圈子——在澳洲的华人创始人、投资人和操盘手。我们做的每一件事，都是让这个圈子真正发挥作用：为圈子里的人，为应该认识他们的投资人，也为想走进澳洲的国内伙伴。</span>
     </p>
+
+    <div class="overview">
+      <div class="item">
+        <div class="num" aria-hidden="true">一</div>
+        <div class="label"><span class="en">Community</span><span class="zh">社群</span></div>
+        <h3><span class="en">Founder salons</span><span class="zh">创始人沙龙</span></h3>
+        <p>
+          <span class="en">Once a month, in one of Australia's major cities: founders, investors and operators around one long table. Invite-only, bilingual, small on purpose.</span>
+          <span class="zh">每月一场，在澳洲主要城市轮流举办：创始人、投资人和操盘手围坐一张长桌。邀请制，中英双语，刻意保持小规模。</span>
+        </p>
+      </div>
+      <div class="item">
+        <div class="num" aria-hidden="true">二</div>
+        <div class="label"><span class="en">Capital</span><span class="zh">资本</span></div>
+        <h3><span class="en">Introductions</span><span class="zh">投融资对接</span></h3>
+        <p>
+          <span class="en">Good founders, introduced to the investors and funds that fit them. For investors, a vetted flow of Chinese-founder and 出海 startups in Australia. Only introductions we'd put our name on.</span>
+          <span class="zh">把好的创业者介绍给真正合适的投资人和机构；为投资人提供经过筛选的项目源——澳洲华人创业公司与出海企业。只做我们愿意背书的引荐。</span>
+        </p>
+      </div>
+      <div class="item">
+        <div class="num" aria-hidden="true">三</div>
+        <div class="label"><span class="en">Programs</span><span class="zh">培训</span></div>
+        <h3><span class="en">Founder bootcamps</span><span class="zh">创业营</span></h3>
+        <p>
+          <span class="en">We design and teach founder programs with partners: the curriculum, startup-101 training, picking the strongest projects at the end, and introducing them to investors.</span>
+          <span class="zh">与合作伙伴一起设计和讲授创业课程：课程大纲、创业 101 培训，结营时甄选优秀项目，并推荐给投资机构。</span>
+        </p>
+      </div>
+      <div class="item">
+        <div class="num" aria-hidden="true">四</div>
+        <div class="label"><span class="en">Cross-border</span><span class="zh">跨境</span></div>
+        <h3><span class="en">China ↔ Australia</span><span class="zh">中澳连接</span></h3>
+        <p>
+          <span class="en">For institutions and companies from China, the partner on the ground in Australia: showcases, delegations, a curated shortlist of projects. And we work the China end too — fairs, innovation parks, local government, investors.</span>
+          <span class="zh">国内机构和企业在澳洲的落地伙伴：项目展示、考察交流、臻选项目名单。我们也在国内那一端下功夫——投资洽谈会、产业园区、地方政府与投资人。</span>
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section id="services">
-
-    <div class="pillar" id="salons">
-      <div class="num" aria-hidden="true">一</div>
-      <div>
-        <div class="label">
-          <span class="en">The community</span>
-          <span class="zh">社群</span>
-        </div>
-        <h3>
-          <span class="en">Founder salons</span>
-          <span class="zh">创始人沙龙</span>
-        </h3>
-        <p>
-          <span class="en">Small, curated gatherings — founders, investors and operators around one long table. Invite-only and bilingual. No stage, no pitch night, no name-tag mixer: small on purpose, so the conversations go deep.</span>
-          <span class="zh">小型、精心组织的线下聚会——创始人、投资人和操盘手围坐一张长桌。邀请制，中英双语。没有舞台，没有路演，没有举着名牌的社交酒会：小，是刻意的选择，因为只有小桌子才聊得深。</span>
-        </p>
-        <p class="muted">
-          <span class="en">This is where trust gets built. Everything else on this page depends on it.</span>
-          <span class="zh">信任在这里建立。这一页上的其他事，都以此为基础。</span>
-        </p>
-        <a class="more" href="/join">
-          <span class="en">Request an invite →</span>
-          <span class="zh">申请参加 →</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="pillar" id="introductions">
-      <div class="num" aria-hidden="true">二</div>
-      <div>
-        <div class="label">
-          <span class="en">Founders ↔ capital</span>
-          <span class="zh">项目 ↔ 资本</span>
-        </div>
-        <h3>
-          <span class="en">Introductions</span>
-          <span class="zh">投融资对接</span>
-        </h3>
-        <p>
-          <span class="en">We connect good founders with the investors who fit them — angels, Australian VCs, and Chinese capital looking at Australia. Every introduction is warm and considered, in both directions: we only make one when we'd put our name on it.</span>
-          <span class="zh">我们把好的创业者介绍给真正合适的投资人——天使投资人、澳洲本地 VC，以及关注澳洲的中国资本。每一次引荐都是双向的、认真考虑过的：只有我们愿意为之背书，才会牵这根线。</span>
-        </p>
-        <ul>
-          <li>
-            <span class="en"><b>For founders</b> — investors who actually back your stage and sector, not a list of names.</span>
-            <span class="zh"><b>对创业者：</b>介绍真正投你这个阶段、这个赛道的投资人，而不是一串名单。</span>
-          </li>
-          <li>
-            <span class="en"><b>For investors and funds</b> — a vetted flow of Chinese-founder startups in Australia, and 出海 companies landing here.</span>
-            <span class="zh"><b>对投资人与机构：</b>经过筛选的项目源——澳洲本地的华人创业公司，以及出海落地澳洲的企业。</span>
-          </li>
-          <li>
-            <span class="en"><b>For companies landing in Australia</b> — the local people you'll need next: investors, customers, advisors.</span>
-            <span class="zh"><b>对出海企业：</b>落地之后需要认识的本地人——投资人、客户、顾问。</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pillar" id="partners">
-      <div class="num" aria-hidden="true">三</div>
-      <div>
-        <div class="label">
-          <span class="en">China ↔ Australia</span>
-          <span class="zh">中国 ↔ 澳洲</span>
-        </div>
-        <h3>
-          <span class="en">Partner events &amp; project curation</span>
-          <span class="zh">合作活动与项目臻选</span>
-        </h3>
-        <p>
-          <span class="en">For institutions, associations and companies from China that want to do something real in Australia — a startup showcase, a sourcing trip, a delegation meeting local founders — we're the partner on the ground. We run the local side end to end and, above all, curate the projects, so your time goes to the ones worth it.</span>
-          <span class="zh">对于想在澳洲真正做点事的国内机构、协会和企业——办一场创业项目展示、来澳考察寻找项目、或带团与本地创业者交流——我们就是你在当地的合作伙伴。本地的事我们全程承接；更重要的是帮你臻选项目，让你的时间花在真正值得的项目上。</span>
-        </p>
-        <ul>
-          <li>
-            <span class="en"><b>Showcases and pitch events</b>, co-hosted with local partners</span>
-            <span class="zh"><b>创业项目展示与路演活动</b>，与本地伙伴联合举办</span>
-          </li>
-          <li>
-            <span class="en"><b>Project sourcing and curation</b> — we know the founders, so the shortlist holds up</span>
-            <span class="zh"><b>项目寻源与臻选</b>——创始人我们都亲自认识，推荐的名单经得起推敲</span>
-          </li>
-          <li>
-            <span class="en"><b>Local execution</b> — venue, co-hosts, the right audience, bilingual hosting</span>
-            <span class="zh"><b>本地执行</b>——场地、联合主办方、对的观众、双语主持</span>
-          </li>
-          <li>
-            <span class="en">It works the other way too: <b>Australian organisations</b> that want to reach the Chinese founder community.</span>
-            <span class="zh">反过来也一样：想接触华人创业圈的<b>澳洲机构</b>，也可以找我们。</span>
-          </li>
-        </ul>
-        <a class="more" href="#events">
-          <span class="en">Past events ↓</span>
-          <span class="zh">往期活动 ↓</span>
-        </a>
-      </div>
-    </div>
-
-  </section>
-
-  <section id="events">
+  <section id="work">
     <div class="kicker">
-      <span class="en">Events</span>
-      <span class="zh">活动</span>
+      <span class="en">Recent Work</span>
+      <span class="zh">近期动态</span>
     </div>
     <h2>
-      <span class="en">The bigger rooms.</span>
-      <span class="zh">更大的场子。</span>
+      <span class="en">What that looks like in practice.</span>
+      <span class="zh">落到实处，是这样的。</span>
     </h2>
-    <p class="muted">
-      <span class="en">Salons stay small and off the record, so they aren't listed here. These are the public events we've put on with partners.</span>
-      <span class="zh">沙龙保持小规模、不对外公开，所以不在这里列出。以下是我们与合作伙伴一起举办的公开活动。</span>
-    </p>
 
-    <!-- Newest first. To add one, copy an <li> and keep it to a line or two. -->
-    <ul class="events">
+    <!-- Ongoing things first, then newest first. Tag each with one of the four
+         labels above. Photos are optional: add an <img> after the <p>. -->
+    <ul class="work">
       <li>
         <div class="when">
-          <span class="en">Sep 2026 · Melbourne</span>
-          <span class="zh">2026.09 · 墨尔本</span>
+          <span class="en">Every month<br>Across Australia</span>
+          <span class="zh">每月<br>澳洲主要城市</span>
+          <span class="tag"><span class="en">Community</span><span class="zh">社群</span></span>
         </div>
         <div>
-          <span class="title">
-            <span class="en">AI Startup Showcase &amp; Networking</span>
-            <span class="zh">AI 创业项目展示交流</span>
-          </span>
-          <span class="note">
-            <span class="en">Early-stage AI founders on stage, co-hosted with the Zhongguancun Science &amp; Technology Entrepreneurs Association and Melbourne partners.</span>
-            <span class="zh">早期 AI 创业项目展示，与中关村科技企业家协会及墨尔本本地伙伴联合主办。</span>
-          </span>
+          <span class="title"><span class="en">Founder salons</span><span class="zh">创始人沙龙</span></span>
+          <p>
+            <span class="en">One long table a month, in one of Australia's major cities. Founders, investors and operators, by invitation. No stage, no pitch night, no name-tag mixer — small on purpose, so the conversations go deep.</span>
+            <span class="zh">每月一张长桌，在澳洲主要城市轮流举办。创始人、投资人和操盘手，凭邀请入座。没有舞台，没有路演，没有举着名牌的社交酒会——小，是刻意的选择，因为只有小桌子才聊得深。</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="when">
+          <span class="en">Ongoing<br>With JR Academy</span>
+          <span class="zh">进行中<br>与匠人学院合办</span>
+          <span class="tag"><span class="en">Programs</span><span class="zh">培训</span></span>
+        </div>
+        <div>
+          <span class="title"><span class="en">AI Solo Founder Bootcamp</span><span class="zh">AI 一人创业营</span></span>
+          <p>
+            <span class="en">A bootcamp for people building a company on their own, run with JR Academy. We own the founder side: the curriculum, teaching, startup-101 training, selecting the strongest projects at the end, and introducing them to investors.</span>
+            <span class="zh">面向一个人创业的创始人，与匠人学院联合承办。新金山负责创业这一侧：课程大纲、授课与创业 101 培训、后期项目甄选，以及投资机构推荐。</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="when">
+          <span class="en">Sep 2026<br>Melbourne</span>
+          <span class="zh">2026.09<br>墨尔本</span>
+          <span class="tag"><span class="en">Cross-border</span><span class="zh">跨境</span></span>
+        </div>
+        <div>
+          <span class="title"><span class="en">AI Startup Showcase &amp; Networking</span><span class="zh">AI 创业项目展示交流</span></span>
+          <p>
+            <span class="en">Early-stage AI founders on stage in Melbourne, co-hosted with JR Academy and the Zhongguancun Science &amp; Technology Entrepreneurs Association.</span>
+            <span class="zh">墨尔本早期 AI 创业项目展示交流，与匠人学院、中关村科技企业家协会联合主办。</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="when">
+          <span class="en">Sep 2026<br>Xiamen</span>
+          <span class="zh">2026.09<br>厦门</span>
+          <span class="tag"><span class="en">Cross-border</span><span class="zh">跨境</span></span>
+        </div>
+        <div>
+          <span class="title"><span class="en">CIFIT &amp; the Gulangyu Forum</span><span class="zh">9·8 投洽会 · 鼓浪屿论坛</span></span>
+          <p>
+            <span class="en">Invited to China's biggest two-way investment fair, 26 years running, and the Gulangyu Forum alongside it. A week on the AI, robotics and investment floor, then a day with the district government — through Xiamen's AI innovation park and in front of local investors. What we heard again and again: Chinese companies want customers abroad, and Australia barely registers on their map yet. Gap or opportunity, depending which side you're standing on.</span>
+            <span class="zh">受邀参加中国国际投资贸易洽谈会——国内规模最大的双向投资盛会，已举办 26 年——以及同期的鼓浪屿论坛。一周时间泡在 AI、机器人与投资展区；另用一天随区政府走访厦门人工智能产业园，并与当地投资人面对面交流。反复听到的是：国内企业非常想要海外客户，而澳洲几乎还不在他们的地图上。是空白还是机会，取决于你站在哪一边。</span>
+          </p>
         </div>
       </li>
     </ul>
+  </section>
+
+  <section id="partners">
+    <div class="kicker">
+      <span class="en">Partners</span>
+      <span class="zh">合作伙伴</span>
+    </div>
+    <h2>
+      <span class="en">Who we've worked with.</span>
+      <span class="zh">与我们合作过的机构。</span>
+    </h2>
+    <div class="partner-groups">
+      <div>
+        <div class="group-label"><span class="en">Partners</span><span class="zh">合作伙伴</span></div>
+        <ul>
+          <li>匠人学院 JR Academy</li>
+          <li>中关村科技企业家协会<small>Zhongguancun Science &amp; Technology Entrepreneurs Association</small></li>
+          <li>ANNG Gallery</li>
+          <li>KSUG.AI</li>
+        </ul>
+      </div>
+      <div>
+        <div class="group-label"><span class="en">Invited to</span><span class="zh">受邀参加</span></div>
+        <ul>
+          <li>中国国际投资贸易洽谈会<small>CIFIT · Xiamen</small></li>
+          <li>鼓浪屿论坛<small>Gulangyu Forum · Xiamen</small></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -491,8 +518,8 @@
           <span class="zh">机构与合作伙伴</span>
         </div>
         <p>
-          <span class="en">Planning something in Australia, or looking for projects here? Tell us what you have in mind.</span>
-          <span class="zh">计划在澳洲办活动，或者想在这里找项目？跟我们说说你的想法。</span>
+          <span class="en">Planning something in Australia, running a program, or looking for projects here? Tell us what you have in mind.</span>
+          <span class="zh">计划在澳洲办活动、办创业营，或者想在这里找项目？跟我们说说你的想法。</span>
         </p>
         <a class="btn ghost en" href="mailto:stan@newgoldmountain.io?subject=Partnership%20enquiry">Email us</a>
         <a class="btn ghost zh" href="mailto:stan@newgoldmountain.io?subject=%E5%90%88%E4%BD%9C%E6%B4%BD%E8%B0%88">邮件联系</a>
