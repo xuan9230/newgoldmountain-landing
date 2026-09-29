@@ -4,11 +4,12 @@ Landing page and join form for the New Gold Mountain community.
 
 Static HTML, no build step. `index.html` is the landing page, `what-we-do.html`
 explains what we do (salons, introductions, bootcamps, China–Australia work)
-with recent work and partners, and `join.html` is the signup form. Deployed on Vercel.
+with recent work and partners, `team.html` introduces the board and advisors,
+and `join.html` is the signup form. Deployed on Vercel.
 
-`cleanUrls` is on, so the pages are served at `/`, `/what-we-do` and `/join` —
-the `.html` URLs 308-redirect to those, which keeps any link shared earlier
-working.
+`cleanUrls` is on, so the pages are served at `/`, `/what-we-do`, `/team` and
+`/join` — the `.html` URLs 308-redirect to those, which keeps any link shared
+earlier working.
 
 To add recent work, copy an `<li>` in the `work` list in `what-we-do.html`
 (ongoing first, then newest first), with both the `en` and `zh` text.
@@ -87,4 +88,5 @@ psql "$DATABASE_URL" -c "select name, email, bio, created_at from members order 
 
 `assets/` holds the logo: `mark.svg` (primary), `mark-mono.svg`,
 `mark-dark.svg`, `lockup.svg` / `lockup-dark.svg` (with wordmark), and
-`favicon.svg`.
+`favicon.svg`. `assets/work/` holds event photos and `assets/team/` the board
+headshots (480px square).

@@ -196,6 +196,18 @@
     margin-right: 1.4rem;
   }
   .founder .links a:hover { border-bottom-color: var(--gold-deep); }
+  .founder + .founder { margin-top: 1.6rem; }
+  .founder .title {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: normal;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-left: 0.6rem;
+  }
+  .team-link { margin-top: 1.8rem; }
+  .seg { white-space: nowrap; } /* one credential per unbreakable run */
 
   /* ---- contact ---- */
   .contact { text-align: center; background: var(--paper-deep); }
@@ -386,19 +398,32 @@
   <section id="founders-section">
     <div class="kicker">
       <span class="en">Who's Behind It</span>
-      <span class="zh">发起人</span>
+      <span class="zh">团队</span>
     </div>
     <div class="founder">
-      <div class="name">Stan Luo</div>
+      <div class="name">Stan Luo <span class="title"><span class="en">Founder</span><span class="zh">创始人</span></span></div>
       <div class="role">
-        <span class="en">Build @ Airtree Portfolio · Ex-McKinsey · Ex-Antler · Sydney</span>
-        <span class="zh">Build @ Airtree Portfolio · 前麦肯锡 · 前 Antler · 常驻悉尼</span>
+        <span class="en"><span class="seg">Build @ Airtree Portfolio</span>&nbsp;· <span class="seg">Ex-McKinsey</span>&nbsp;· <span class="seg">Ex-Antler</span>&nbsp;· <span class="seg">Sydney</span></span>
+        <span class="zh"><span class="seg">Build @ Airtree Portfolio</span>&nbsp;· <span class="seg">前麦肯锡</span>&nbsp;· <span class="seg">前 Antler</span>&nbsp;· <span class="seg">常驻悉尼</span></span>
       </div>
       <div class="links">
         <a href="https://www.linkedin.com/in/stanluo/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:stan@newgoldmountain.io">stan@newgoldmountain.io</a>
       </div>
     </div>
+    <div class="founder">
+      <div class="name">Lightman <span class="title"><span class="en">Board member</span><span class="zh">理事</span></span></div>
+      <div class="role">
+        <span class="en"><span class="seg">CEO, JR Academy</span>&nbsp;· <span class="seg">Serial founder &amp; investor</span></span>
+        <span class="zh"><span class="seg">匠人学院 CEO</span>&nbsp;· <span class="seg">连续创业者、投资人</span></span>
+      </div>
+    </div>
+    <p class="team-link">
+      <a class="more" href="/team">
+        <span class="en">The board and advisors →</span>
+        <span class="zh">理事会与顾问 →</span>
+      </a>
+    </p>
   </section>
 
 </main>
@@ -436,6 +461,7 @@
   </svg>
   <nav class="footer-nav">
     <a href="/what-we-do"><span class="en">What we do</span><span class="zh">我们做什么</span></a>
+    <a href="/team"><span class="en">Team</span><span class="zh">团队</span></a>
     <a href="/join"><span class="en">Join</span><span class="zh">加入</span></a>
   </nav>
   <p>

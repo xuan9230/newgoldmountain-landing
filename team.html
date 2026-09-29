@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team 团队 — New Gold Mountain 新金山</title>
+<meta name="description" content="The board and advisors of New Gold Mountain (新金山), a community for the Chinese ecosystem in Australian venture and startups.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<style>
+  :root {
+    --paper: #f7f3ea;
+    --paper-deep: #efe9db;
+    --ink: #1e1b16;
+    --ink-soft: #55503f;
+    --gold: #b08d2f;
+    --gold-deep: #8a6d1f;
+    --line: #d9d1bd;
+    --serif-en: "Iowan Old Style", "Palatino", "Georgia", serif;
+    --serif-zh: "Songti SC", "STSong", "SimSun", serif;
+    --sans: "Avenir Next", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif-en), var(--serif-zh);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- language toggle ---- */
+  body.lang-en .zh { display: none; }
+  body.lang-zh .en { display: none; }
+  body.lang-zh {
+    font-family: var(--serif-zh), var(--serif-en);
+    letter-spacing: 0.02em;
+  }
+
+  .lang-switch {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(247, 243, 234, 0.9);
+    backdrop-filter: blur(6px);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+  }
+  .lang-switch button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    font: inherit;
+  }
+  .lang-switch button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { text-align: center; padding: 4.5rem 0 0; }
+  .masthead a { text-decoration: none; color: inherit; display: inline-block; }
+  .masthead .hanzi {
+    font-family: var(--serif-zh);
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin-left: 0.12em;
+    line-height: 1.2;
+  }
+  .masthead .hanzi .shan { color: var(--gold); }
+  .masthead .latin {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.34em;
+    margin-left: 0.34em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.5rem;
+  }
+
+  /* ---- sections ---- */
+  section { padding: 4.5rem 0; }
+  section + section { border-top: 1px solid var(--line); }
+  .intro { padding: 3.5rem 0 4rem; }
+
+  .kicker {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 1.8rem;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1.4rem;
+  }
+  p { margin-bottom: 1.1rem; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+  .muted { color: var(--ink-soft); }
+  .lede { font-size: 1.08rem; }
+
+  /* ---- board ---- */
+  .people {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem 2rem;
+  }
+  .person .photo {
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    margin-bottom: 1.2rem;
+  }
+  .person .role {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 0.2rem;
+  }
+  .person .name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .person .creds {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0.3rem 0 0.9rem;
+  }
+  .person p { font-size: 0.97rem; color: var(--ink-soft); }
+  .seg { white-space: nowrap; } /* one credential per unbreakable run */
+  .person .links {
+    margin-top: 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+  }
+  .person .links a {
+    color: var(--gold-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    margin-right: 1.2rem;
+  }
+  .person .links a:hover { border-bottom-color: var(--gold-deep); }
+  @media (max-width: 600px) {
+    .people { grid-template-columns: 1fr; }
+    .person .photo { max-width: 11rem; }
+  }
+
+  /* ---- advisors ---- */
+  ul.orgs {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    margin-top: 1.8rem;
+    border-top: 1px solid var(--line);
+  }
+  ul.orgs li {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--line);
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  ul.orgs small {
+    display: block;
+    font-family: var(--sans);
+    font-weight: normal;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 600px) {
+    ul.orgs { grid-template-columns: 1fr; }
+  }
+
+  footer {
+    padding: 3rem 1.5rem 3.5rem;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+  footer p { margin-bottom: 0.4rem; color: inherit; }
+  footer .footer-mark { display: block; margin: 0 auto 1.3rem; }
+  .footer-nav { margin-bottom: 1rem; }
+  .footer-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin: 0 0.7rem;
+    border-bottom: 1px solid transparent;
+  }
+  .footer-nav a:hover { color: var(--gold-deep); border-bottom-color: var(--line); }
+</style>
+</head>
+<body class="lang-en">
+
+<div class="lang-switch" role="group" aria-label="Language">
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+  <div class="masthead">
+    <a href="/">
+      <div class="hanzi">新金<span class="shan">山</span></div>
+      <div class="latin">New Gold Mountain</div>
+    </a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="intro">
+    <div class="kicker">
+      <span class="en">Team</span>
+      <span class="zh">团队</span>
+    </div>
+    <h1>
+      <span class="en">The people behind the table.</span>
+      <span class="zh">这张桌子背后的人。</span>
+    </h1>
+    <p class="lede">
+      <span class="en">A small board, and a wider circle of advisors from Australian venture and the Chinese startup world.</span>
+      <span class="zh">一个精简的理事会，加上一圈来自澳洲创投与华人创业圈的顾问。</span>
+    </p>
+  </section>
+
+  <section id="board">
+    <div class="kicker">
+      <span class="en">Board</span>
+      <span class="zh">理事会</span>
+    </div>
+    <div class="people">
+      <article class="person">
+        <img class="photo" src="assets/team/stan-luo.webp" width="480" height="480" alt="Stan Luo">
+        <div class="role"><span class="en">Founder</span><span class="zh">创始人</span></div>
+        <h2 class="name">Stan Luo</h2>
+        <div class="creds">
+          <span class="en"><span class="seg">Build @ Airtree Portfolio</span>&nbsp;· <span class="seg">Ex-McKinsey</span>&nbsp;· <span class="seg">Ex-Antler</span>&nbsp;· <span class="seg">Sydney</span></span>
+          <span class="zh"><span class="seg">Build @ Airtree Portfolio</span>&nbsp;· <span class="seg">前麦肯锡</span>&nbsp;· <span class="seg">前 Antler</span>&nbsp;· <span class="seg">常驻悉尼</span></span>
+        </div>
+        <p>
+          <span class="en">Started New Gold Mountain in 2026. Hosts the salons, makes the introductions, and does the groundwork on the China end — most recently at CIFIT in Xiamen.</span>
+          <span class="zh">2026 年创办新金山。主持沙龙、牵线对接，也在国内那一端下功夫——最近一次是厦门投洽会。</span>
+        </p>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/stanluo/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:stan@newgoldmountain.io">stan@newgoldmountain.io</a>
+        </div>
+      </article>
+      <article class="person">
+        <img class="photo" src="assets/team/lightman.webp" width="480" height="480" alt="Lightman">
+        <div class="role"><span class="en">Board member</span><span class="zh">理事</span></div>
+        <h2 class="name">Lightman</h2>
+        <div class="creds">
+          <span class="en"><span class="seg">CEO, JR Academy</span>&nbsp;· <span class="seg">Serial founder &amp; investor</span></span>
+          <span class="zh"><span class="seg">匠人学院 CEO</span>&nbsp;· <span class="seg">连续创业者、投资人</span></span>
+        </div>
+        <p>
+          <span class="en">Runs JR Academy (匠人学院), training Chinese tech talent since 2017. Our partner on the AI One-Person Company Bootcamp, and host of the Melbourne AI Startup Showcase.</span>
+          <span class="zh">执掌匠人学院，自 2017 年起培养华人科技人才。与新金山合办 AI 一人创业营，也是墨尔本 AI 创业项目展示交流的主办方。</span>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="advisors">
+    <div class="kicker">
+      <span class="en">Advisors</span>
+      <span class="zh">顾问</span>
+    </div>
+    <p>
+      <span class="en">Founders, investors and operators who share what they know at our tables and look at the projects we bring them.</span>
+      <span class="zh">来分享经验、也帮我们看项目的创业者、投资人和操盘手。</span>
+    </p>
+    <p class="muted">
+      <span class="en">They're here in a personal capacity, so we name where they're from, not who they are.</span>
+      <span class="zh">他们以个人身份参与，所以这里只写机构，不写名字。</span>
+    </p>
+    <!-- Organisations only: advisors join as individuals, not on behalf of their firms. -->
+    <ul class="orgs">
+      <li>Blackbird<small><span class="en">Venture capital</span><span class="zh">风险投资</span></small></li>
+      <li>Startmate<small><span class="en">Accelerator &amp; fund</span><span class="zh">加速器与基金</span></small></li>
+      <li>澳洲创业访谈录<small><span class="en">Startup podcast</span><span class="zh">创业播客</span></small></li>
+      <li>混沌学园 Hundun Academy<small><span class="en">Innovation education</span><span class="zh">创新教育</span></small></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <svg class="footer-mark" width="26" height="26" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#1e1b16" d="M9 28 L16 25 L16 54 L9 54 Z M48 25 L55 28 L55 54 L48 54 Z M9 49 L55 49 L57 54 L7 54 Z"/>
+    <path fill="#8a6d1f" d="M30.5 9 Q26 33 19.5 49 L32.5 49 Z"/>
+    <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
+  </svg>
+  <nav class="footer-nav">
+    <a href="/"><span class="en">Home</span><span class="zh">首页</span></a>
+    <a href="/what-we-do"><span class="en">What we do</span><span class="zh">我们做什么</span></a>
+    <a href="/team"><span class="en">Team</span><span class="zh">团队</span></a>
+    <a href="/join"><span class="en">Join</span><span class="zh">加入</span></a>
+  </nav>
+  <p>
+    <span class="en">Questions? <a href="mailto:stan@newgoldmountain.io" style="color:var(--gold-deep)">stan@newgoldmountain.io</a></span>
+    <span class="zh">有问题？<a href="mailto:stan@newgoldmountain.io" style="color:var(--gold-deep)">stan@newgoldmountain.io</a></span>
+  </p>
+  <p>© 2026 New Gold Mountain 新金山</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.remove('lang-en', 'lang-zh');
+    document.body.classList.add('lang-' + lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    try { localStorage.setItem('ngm-lang', lang); } catch (e) {}
+  }
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('ngm-lang'); } catch (e) {}
+    var lang = saved || (navigator.language && navigator.language.toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+    setLang(lang);
+  })();
+</script>
+
+</body>
+</html>
