@@ -156,6 +156,20 @@
     margin-bottom: 0.5rem;
   }
   .overview p { font-size: 0.95rem; color: var(--ink-soft); }
+  .overview .onboard {
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+  }
+  .overview .onboard-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 0.2rem;
+  }
+  .overview .onboard b { color: var(--ink); font-weight: 600; }
   @media (max-width: 600px) {
     .overview { grid-template-columns: 1fr; gap: 1.8rem; }
   }
@@ -374,6 +388,13 @@
         <p>
           <span class="en">Good founders, introduced to the investors and funds that fit them. For investors, a vetted flow of Chinese-founder and 出海 startups in Australia. Only introductions we'd put our name on.</span>
           <span class="zh">把好的创业者介绍给真正合适的投资人和机构；为投资人提供经过筛选的项目源——澳洲华人创业公司与出海企业。只做我们愿意背书的引荐。</span>
+        </p>
+        <!-- People from these organisations, coming as friends. Not institutional
+             partners, so they stay out of the partner list below. -->
+        <p class="onboard">
+          <span class="onboard-label"><span class="en">Already on board</span><span class="zh">已加入</span></span>
+          <span class="en">Friends from <b>Blackbird</b>, <b>Startmate</b>, the startup podcast <b>澳洲创业访谈录</b> and <b>Hundun Academy</b> (混沌学园), who've agreed to come share what they know and meet the good projects we bring them.</span>
+          <span class="zh">来自 <b>Blackbird</b>、<b>Startmate</b>、<b>澳洲创业访谈录</b>、<b>混沌学园</b>的朋友——他们愿意来分享经验，也愿意对接好的项目。</span>
         </p>
       </div>
       <div class="item">
