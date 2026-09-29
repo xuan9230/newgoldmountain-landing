@@ -193,14 +193,27 @@
     margin-bottom: 0.4rem;
   }
   ul.work p { font-size: 0.97rem; color: var(--ink-soft); }
-  /* optional photo: <img src="assets/work/…" alt="…" loading="lazy"> after the <p> */
-  ul.work img {
+  /* Photos sit in one row. Give each link a flex value equal to its photo's
+     width ÷ height, and the row lines up at a shared height with no cropping. */
+  ul.work .photos { display: flex; gap: 0.6rem; margin-top: 1.1rem; }
+  ul.work .photos a { display: block; min-width: 0; }
+  ul.work .photos img {
     display: block;
     width: 100%;
-    height: auto;
-    margin-top: 1rem;
+    height: 100%; /* absorbs the pixel or so the gap costs */
+    object-fit: cover;
     border: 1px solid var(--line);
   }
+  ul.work .readmore {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--gold-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  ul.work .readmore:hover { border-bottom-color: var(--gold-deep); }
   @media (max-width: 540px) {
     ul.work > li { grid-template-columns: 1fr; }
     ul.work .when { padding-top: 0; margin-bottom: 0.5rem; }
@@ -350,8 +363,8 @@
         <div class="label"><span class="en">Community</span><span class="zh">社群</span></div>
         <h3><span class="en">Founder salons</span><span class="zh">创始人沙龙</span></h3>
         <p>
-          <span class="en">Once a month, in one of Australia's major cities: founders, investors and operators around one long table. Invite-only, bilingual, small on purpose.</span>
-          <span class="zh">每月一场，在澳洲主要城市轮流举办：创始人、投资人和操盘手围坐一张长桌。邀请制，中英双语，刻意保持小规模。</span>
+          <span class="en">Once a month, moving between Melbourne, Sydney and Brisbane: founders, investors and operators around one long table. Invite-only, bilingual, small on purpose.</span>
+          <span class="zh">每月一场，在墨尔本、悉尼、布里斯班之间轮换：创始人、投资人和操盘手围坐一张长桌。邀请制，中英双语，刻意保持小规模。</span>
         </p>
       </div>
       <div class="item">
@@ -395,19 +408,20 @@
     </h2>
 
     <!-- Ongoing things first, then newest first. Tag each with one of the four
-         labels above. Photos are optional: add an <img> after the <p>. -->
+         labels above. Photos are optional: copy the .photos block, and keep
+         them in assets/work/, about 1200px tall. -->
     <ul class="work">
       <li>
         <div class="when">
-          <span class="en">Every month<br>Across Australia</span>
-          <span class="zh">每月<br>澳洲主要城市</span>
+          <span class="en">Monthly<br>Melbourne, Sydney, Brisbane</span>
+          <span class="zh">每月<br>墨尔本、悉尼、布里斯班</span>
           <span class="tag"><span class="en">Community</span><span class="zh">社群</span></span>
         </div>
         <div>
           <span class="title"><span class="en">Founder salons</span><span class="zh">创始人沙龙</span></span>
           <p>
-            <span class="en">One long table a month, in one of Australia's major cities. Founders, investors and operators, by invitation. No stage, no pitch night, no name-tag mixer — small on purpose, so the conversations go deep.</span>
-            <span class="zh">每月一张长桌，在澳洲主要城市轮流举办。创始人、投资人和操盘手，凭邀请入座。没有舞台，没有路演，没有举着名牌的社交酒会——小，是刻意的选择，因为只有小桌子才聊得深。</span>
+            <span class="en">One long table a month, moving between cities: the first was in Melbourne, Sydney follows in mid-October 2026, then Brisbane. Founders, investors and operators, by invitation. No stage, no pitch night, no name-tag mixer — small on purpose, so the conversations go deep.</span>
+            <span class="zh">每月一张长桌，在城市之间轮换：第一场在墨尔本，2026 年 10 月中旬第二场在悉尼，之后是布里斯班。创始人、投资人和操盘手，凭邀请入座。没有舞台，没有路演，没有举着名牌的社交酒会——小，是刻意的选择，因为只有小桌子才聊得深。</span>
           </p>
         </div>
       </li>
@@ -418,9 +432,9 @@
           <span class="tag"><span class="en">Programs</span><span class="zh">培训</span></span>
         </div>
         <div>
-          <span class="title"><span class="en">AI Solo Founder Bootcamp</span><span class="zh">AI 一人创业营</span></span>
+          <span class="title"><span class="en">AI One-Person Company (OPC) Bootcamp</span><span class="zh">AI 一人创业营（OPC）</span></span>
           <p>
-            <span class="en">A bootcamp for people building a company on their own, run with JR Academy. We own the founder side: the curriculum, teaching, startup-101 training, selecting the strongest projects at the end, and introducing them to investors.</span>
+            <span class="en">A bootcamp for people building a company on their own with AI, run with JR Academy. We own the founder side: the curriculum, teaching, startup-101 training, selecting the strongest projects at the end, and introducing them to investors.</span>
             <span class="zh">面向一个人创业的创始人，与匠人学院联合承办。新金山负责创业这一侧：课程大纲、授课与创业 101 培训、后期项目甄选，以及投资机构推荐。</span>
           </p>
         </div>
@@ -451,6 +465,20 @@
             <span class="en">Invited to China's biggest two-way investment fair, 26 years running, and the Gulangyu Forum alongside it. A week on the AI, robotics and investment floor, then a day with the district government — through Xiamen's AI innovation park and in front of local investors. What we heard again and again: Chinese companies want customers abroad, and Australia barely registers on their map yet. Gap or opportunity, depending which side you're standing on.</span>
             <span class="zh">受邀参加中国国际投资贸易洽谈会——国内规模最大的双向投资盛会，已举办 26 年——以及同期的鼓浪屿论坛。一周时间泡在 AI、机器人与投资展区；另用一天随区政府走访厦门人工智能产业园，并与当地投资人面对面交流。反复听到的是：国内企业非常想要海外客户，而澳洲几乎还不在他们的地图上。是空白还是机会，取决于你站在哪一边。</span>
           </p>
+          <div class="photos">
+            <a href="assets/work/2026-09-xiamen-cifit.webp" target="_blank" rel="noopener" style="flex: 0.75">
+              <img src="assets/work/2026-09-xiamen-cifit.webp" width="900" height="1200" loading="lazy"
+                alt="Stan Luo at the entrance to CIFIT in Xiamen, beside the fair's giant golden 98 key">
+            </a>
+            <a href="assets/work/2026-09-xiamen-gulangyu-forum.webp" target="_blank" rel="noopener" style="flex: 1.3333">
+              <img src="assets/work/2026-09-xiamen-gulangyu-forum.webp" width="1600" height="1200" loading="lazy"
+                alt="The World Business Leaders Roundtable for Global Investment on stage at the Gulangyu Forum 2026">
+            </a>
+          </div>
+          <a class="readmore" href="https://lnkd.in/p/g2wJGN52" target="_blank" rel="noopener">
+            <span class="en">The full write-up on LinkedIn →</span>
+            <span class="zh">LinkedIn 上的完整记录 →</span>
+          </a>
         </div>
       </li>
     </ul>
@@ -467,12 +495,10 @@
     </h2>
     <div class="partner-groups">
       <div>
-        <div class="group-label"><span class="en">Partners</span><span class="zh">合作伙伴</span></div>
+        <div class="group-label"><span class="en">Organisations</span><span class="zh">合作机构</span></div>
         <ul>
           <li>匠人学院 JR Academy</li>
           <li>中关村科技企业家协会<small>Zhongguancun Science &amp; Technology Entrepreneurs Association</small></li>
-          <li>ANNG Gallery</li>
-          <li>KSUG.AI</li>
         </ul>
       </div>
       <div>
