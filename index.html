@@ -165,6 +165,16 @@
     color: var(--ink-soft);
     font-size: 0.95rem;
   }
+  #what ul.for-list { margin-bottom: 1.4rem; }
+
+  .more {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--gold-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .more:hover { border-bottom-color: var(--gold-deep); }
 
   /* ---- founders ---- */
   .founder .name { font-weight: 600; font-size: 1.1rem; }
@@ -228,6 +238,14 @@
   }
   footer p { margin-bottom: 0.4rem; color: inherit; }
   footer .footer-mark { display: block; margin: 0 auto 1.3rem; }
+  .footer-nav { margin-bottom: 1rem; }
+  .footer-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin: 0 0.7rem;
+    border-bottom: 1px solid transparent;
+  }
+  .footer-nav a:hover { color: var(--gold-deep); border-bottom-color: var(--line); }
 </style>
 </head>
 <body class="lang-en">
@@ -259,16 +277,50 @@
       <span class="zh">我们做什么</span>
     </div>
     <h2>
-      <span class="en">Founder salons. Small on purpose.</span>
-      <span class="zh">创始人沙龙，刻意保持小规模。</span>
+      <span class="en">A community first — then the connections it makes possible.</span>
+      <span class="zh">先有社群，才有连接。</span>
     </h2>
-    <p>
-      <span class="en">Small, curated, in-person gatherings — founders, investors, and operators around one table. No stage, no pitch night, no name-tag mixer. Small on purpose, so conversations go deep.</span>
-      <span class="zh">小型、精心组织的线下聚会——创始人、投资人和操盘手围坐一桌。没有舞台，没有路演，没有举着名牌的社交酒会。小，是刻意的选择，因为只有小桌子才聊得深。</span>
-    </p>
     <p class="muted">
       <span class="en">The Australian venture ecosystem has very little Chinese presence, and founders and investors on both sides want to connect. We're building that room.</span>
       <span class="zh">澳洲创投圈里华人的声音还很少，而两边的创始人和投资人其实都想认识彼此。我们想把这张桌子搭起来。</span>
+    </p>
+    <ul class="for-list">
+      <li>
+        <span class="who">
+          <span class="en">Founder salons</span>
+          <span class="zh">创始人沙龙</span>
+        </span>
+        <span class="why">
+          <span class="en">Small, curated, invite-only. Founders, investors and operators around one long table.</span>
+          <span class="zh">小型、精心组织、邀请制。创始人、投资人和操盘手围坐一张长桌。</span>
+        </span>
+      </li>
+      <li>
+        <span class="who">
+          <span class="en">Introductions</span>
+          <span class="zh">投融资对接</span>
+        </span>
+        <span class="why">
+          <span class="en">Good founders, introduced to the investors and funds that fit them.</span>
+          <span class="zh">把好的创业者，介绍给真正合适的投资人和机构。</span>
+        </span>
+      </li>
+      <li>
+        <span class="who">
+          <span class="en">Partner events &amp; project curation</span>
+          <span class="zh">合作活动与项目臻选</span>
+        </span>
+        <span class="why">
+          <span class="en">The partner on the ground for institutions from China: showcases, a curated shortlist of projects, local execution.</span>
+          <span class="zh">国内机构在澳洲的落地伙伴：项目展示、项目臻选、本地执行。</span>
+        </span>
+      </li>
+    </ul>
+    <p>
+      <a class="more" href="/what-we-do">
+        <span class="en">More on what we do, and events →</span>
+        <span class="zh">详细了解我们做什么，以及近期活动 →</span>
+      </a>
     </p>
   </section>
 
@@ -306,6 +358,16 @@
         <span class="why">
           <span class="en">Local investors and operators who want to meet the Chinese founder community.</span>
           <span class="zh">想认识华人创业者圈子的本地投资人和从业者。</span>
+        </span>
+      </li>
+      <li>
+        <span class="who">
+          <span class="en">Institutions and partners from China</span>
+          <span class="zh">来自国内的机构与合作伙伴</span>
+        </span>
+        <span class="why">
+          <span class="en">Associations, funds and companies that want to run something in Australia, or find the projects here worth backing.</span>
+          <span class="zh">想在澳洲办活动、或在这里寻找值得投的项目的协会、基金和企业。</span>
         </span>
       </li>
     </ul>
@@ -350,8 +412,8 @@
       <span class="zh">加入名单</span>
     </a>
     <p class="alt-contact">
-      <span class="en">Or just email <a href="mailto:stan@newgoldmountain.io?subject=New%20Gold%20Mountain">stan@newgoldmountain.io</a>.</span>
-      <span class="zh">或者直接发邮件到 <a href="mailto:stan@newgoldmountain.io?subject=New%20Gold%20Mountain">stan@newgoldmountain.io</a>。</span>
+      <span class="en">Partnerships, or anything else — email <a href="mailto:stan@newgoldmountain.io?subject=New%20Gold%20Mountain">stan@newgoldmountain.io</a>.</span>
+      <span class="zh">合作洽谈或其他事宜，请发邮件到 <a href="mailto:stan@newgoldmountain.io?subject=New%20Gold%20Mountain">stan@newgoldmountain.io</a>。</span>
     </p>
   </div>
 </section>
@@ -362,6 +424,10 @@
     <path fill="#8a6d1f" d="M30.5 9 Q26 33 19.5 49 L32.5 49 Z"/>
     <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
   </svg>
+  <nav class="footer-nav">
+    <a href="/what-we-do"><span class="en">What we do</span><span class="zh">我们做什么</span></a>
+    <a href="/join"><span class="en">Join</span><span class="zh">加入</span></a>
+  </nav>
   <p>
     <span class="en">In the 1850s gold rush, Melbourne was 新金山 — New Gold Mountain.</span>
     <span class="zh">1850 年代淘金热时，墨尔本被称作新金山。</span>

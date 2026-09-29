@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Do 我们做什么 — New Gold Mountain 新金山</title>
+<meta name="description" content="New Gold Mountain (新金山): founder salons, introductions between founders and investors, and partner events that bridge China and Australia's startup ecosystem.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<style>
+  :root {
+    --paper: #f7f3ea;
+    --paper-deep: #efe9db;
+    --ink: #1e1b16;
+    --ink-soft: #55503f;
+    --gold: #b08d2f;
+    --gold-deep: #8a6d1f;
+    --line: #d9d1bd;
+    --serif-en: "Iowan Old Style", "Palatino", "Georgia", serif;
+    --serif-zh: "Songti SC", "STSong", "SimSun", serif;
+    --sans: "Avenir Next", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif-en), var(--serif-zh);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- language toggle ---- */
+  body.lang-en .zh { display: none; }
+  body.lang-zh .en { display: none; }
+  body.lang-zh {
+    font-family: var(--serif-zh), var(--serif-en);
+    letter-spacing: 0.02em;
+  }
+
+  .lang-switch {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(247, 243, 234, 0.9);
+    backdrop-filter: blur(6px);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+  }
+  .lang-switch button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    font: inherit;
+  }
+  .lang-switch button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { text-align: center; padding: 4.5rem 0 0; }
+  .masthead a { text-decoration: none; color: inherit; display: inline-block; }
+  .masthead .hanzi {
+    font-family: var(--serif-zh);
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin-left: 0.12em;
+    line-height: 1.2;
+  }
+  .masthead .hanzi .shan { color: var(--gold); }
+  .masthead .latin {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.34em;
+    margin-left: 0.34em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.5rem;
+  }
+
+  /* ---- sections ---- */
+  section { padding: 4.5rem 0; }
+  section + section { border-top: 1px solid var(--line); }
+  .intro { padding: 3.5rem 0 3rem; }
+  #services { padding: 3rem 0; }
+
+  .kicker {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1.4rem;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 1.4rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+  }
+  p { margin-bottom: 1.1rem; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+  .muted { color: var(--ink-soft); }
+  .lede { font-size: 1.08rem; }
+
+  .more {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--gold-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .more:hover { border-bottom-color: var(--gold-deep); }
+
+  /* ---- the three things we do ---- */
+  .pillar {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr;
+    column-gap: 1.2rem;
+    padding: 2.6rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .pillar:first-of-type { border-top: none; padding-top: 0.6rem; }
+  .pillar .num {
+    font-family: var(--serif-zh);
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gold);
+    padding-top: 0.15rem;
+  }
+  .pillar .label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 0.35rem;
+  }
+  .pillar ul { list-style: none; margin: 1.2rem 0 0; }
+  .pillar li {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-bottom: 0.55rem;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+  .pillar li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 0.65rem;
+    height: 1px;
+    background: var(--gold);
+  }
+  .pillar li b { color: var(--ink); font-weight: 600; }
+  .pillar .more { display: inline-block; margin-top: 1.1rem; }
+
+  @media (max-width: 540px) {
+    .pillar { grid-template-columns: 1fr; }
+    .pillar .num { font-size: 2rem; margin-bottom: 0.8rem; }
+  }
+
+  /* ---- events ---- */
+  ul.events { list-style: none; margin-top: 2rem; }
+  ul.events li {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    column-gap: 1.4rem;
+    padding: 1.3rem 0;
+    border-top: 1px solid var(--line);
+  }
+  ul.events li:last-child { border-bottom: 1px solid var(--line); }
+  ul.events .when {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--gold-deep);
+    padding-top: 0.25rem;
+  }
+  ul.events .title { display: block; font-weight: 600; }
+  ul.events .note {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-top: 0.15rem;
+  }
+  @media (max-width: 540px) {
+    ul.events li { grid-template-columns: 1fr; }
+    ul.events .when { padding-top: 0; margin-bottom: 0.2rem; }
+  }
+
+  /* ---- work with us ---- */
+  .contact { background: var(--paper-deep); }
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .path {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1.6rem 1.5rem 1.7rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .path .who {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 0.7rem;
+  }
+  .path p { flex: 1; color: var(--ink-soft); font-size: 0.97rem; }
+  .btn {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 1.3rem;
+    padding: 0.75rem 1.6rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--gold-deep); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  @media (max-width: 600px) {
+    .paths { grid-template-columns: 1fr; }
+  }
+
+  footer {
+    padding: 3rem 1.5rem 3.5rem;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+  footer p { margin-bottom: 0.4rem; color: inherit; }
+  footer .footer-mark { display: block; margin: 0 auto 1.3rem; }
+  .footer-nav { margin-bottom: 1rem; }
+  .footer-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin: 0 0.7rem;
+    border-bottom: 1px solid transparent;
+  }
+  .footer-nav a:hover { color: var(--gold-deep); border-bottom-color: var(--line); }
+</style>
+</head>
+<body class="lang-en">
+
+<div class="lang-switch" role="group" aria-label="Language">
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="wrap">
+  <div class="masthead">
+    <a href="/">
+      <div class="hanzi">新金<span class="shan">山</span></div>
+      <div class="latin">New Gold Mountain</div>
+    </a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="intro">
+    <div class="kicker">
+      <span class="en">What We Do</span>
+      <span class="zh">我们做什么</span>
+    </div>
+    <h1>
+      <span class="en">Everything starts at the table.</span>
+      <span class="zh">一切从一张桌子开始。</span>
+    </h1>
+    <p class="lede">
+      <span class="en">New Gold Mountain is built on one thing: a network of Chinese founders, investors and operators in Australia that we know personally. Everything we do puts that network to work — for the people in it, for the investors who should meet them, and for partners in China looking for a way in.</span>
+      <span class="zh">新金山的根基只有一样：一个我们亲自认识、亲自筛选过的圈子——在澳洲的华人创始人、投资人和操盘手。我们做的每一件事，都是让这个圈子真正发挥作用：为圈子里的人，为应该认识他们的投资人，也为想走进澳洲的国内伙伴。</span>
+    </p>
+  </section>
+
+  <section id="services">
+
+    <div class="pillar" id="salons">
+      <div class="num" aria-hidden="true">一</div>
+      <div>
+        <div class="label">
+          <span class="en">The community</span>
+          <span class="zh">社群</span>
+        </div>
+        <h3>
+          <span class="en">Founder salons</span>
+          <span class="zh">创始人沙龙</span>
+        </h3>
+        <p>
+          <span class="en">Small, curated gatherings — founders, investors and operators around one long table. Invite-only and bilingual. No stage, no pitch night, no name-tag mixer: small on purpose, so the conversations go deep.</span>
+          <span class="zh">小型、精心组织的线下聚会——创始人、投资人和操盘手围坐一张长桌。邀请制，中英双语。没有舞台，没有路演，没有举着名牌的社交酒会：小，是刻意的选择，因为只有小桌子才聊得深。</span>
+        </p>
+        <p class="muted">
+          <span class="en">This is where trust gets built. Everything else on this page depends on it.</span>
+          <span class="zh">信任在这里建立。这一页上的其他事，都以此为基础。</span>
+        </p>
+        <a class="more" href="/join">
+          <span class="en">Request an invite →</span>
+          <span class="zh">申请参加 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pillar" id="introductions">
+      <div class="num" aria-hidden="true">二</div>
+      <div>
+        <div class="label">
+          <span class="en">Founders ↔ capital</span>
+          <span class="zh">项目 ↔ 资本</span>
+        </div>
+        <h3>
+          <span class="en">Introductions</span>
+          <span class="zh">投融资对接</span>
+        </h3>
+        <p>
+          <span class="en">We connect good founders with the investors who fit them — angels, Australian VCs, and Chinese capital looking at Australia. Every introduction is warm and considered, in both directions: we only make one when we'd put our name on it.</span>
+          <span class="zh">我们把好的创业者介绍给真正合适的投资人——天使投资人、澳洲本地 VC，以及关注澳洲的中国资本。每一次引荐都是双向的、认真考虑过的：只有我们愿意为之背书，才会牵这根线。</span>
+        </p>
+        <ul>
+          <li>
+            <span class="en"><b>For founders</b> — investors who actually back your stage and sector, not a list of names.</span>
+            <span class="zh"><b>对创业者：</b>介绍真正投你这个阶段、这个赛道的投资人，而不是一串名单。</span>
+          </li>
+          <li>
+            <span class="en"><b>For investors and funds</b> — a vetted flow of Chinese-founder startups in Australia, and 出海 companies landing here.</span>
+            <span class="zh"><b>对投资人与机构：</b>经过筛选的项目源——澳洲本地的华人创业公司，以及出海落地澳洲的企业。</span>
+          </li>
+          <li>
+            <span class="en"><b>For companies landing in Australia</b> — the local people you'll need next: investors, customers, advisors.</span>
+            <span class="zh"><b>对出海企业：</b>落地之后需要认识的本地人——投资人、客户、顾问。</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pillar" id="partners">
+      <div class="num" aria-hidden="true">三</div>
+      <div>
+        <div class="label">
+          <span class="en">China ↔ Australia</span>
+          <span class="zh">中国 ↔ 澳洲</span>
+        </div>
+        <h3>
+          <span class="en">Partner events &amp; project curation</span>
+          <span class="zh">合作活动与项目臻选</span>
+        </h3>
+        <p>
+          <span class="en">For institutions, associations and companies from China that want to do something real in Australia — a startup showcase, a sourcing trip, a delegation meeting local founders — we're the partner on the ground. We run the local side end to end and, above all, curate the projects, so your time goes to the ones worth it.</span>
+          <span class="zh">对于想在澳洲真正做点事的国内机构、协会和企业——办一场创业项目展示、来澳考察寻找项目、或带团与本地创业者交流——我们就是你在当地的合作伙伴。本地的事我们全程承接；更重要的是帮你臻选项目，让你的时间花在真正值得的项目上。</span>
+        </p>
+        <ul>
+          <li>
+            <span class="en"><b>Showcases and pitch events</b>, co-hosted with local partners</span>
+            <span class="zh"><b>创业项目展示与路演活动</b>，与本地伙伴联合举办</span>
+          </li>
+          <li>
+            <span class="en"><b>Project sourcing and curation</b> — we know the founders, so the shortlist holds up</span>
+            <span class="zh"><b>项目寻源与臻选</b>——创始人我们都亲自认识，推荐的名单经得起推敲</span>
+          </li>
+          <li>
+            <span class="en"><b>Local execution</b> — venue, co-hosts, the right audience, bilingual hosting</span>
+            <span class="zh"><b>本地执行</b>——场地、联合主办方、对的观众、双语主持</span>
+          </li>
+          <li>
+            <span class="en">It works the other way too: <b>Australian organisations</b> that want to reach the Chinese founder community.</span>
+            <span class="zh">反过来也一样：想接触华人创业圈的<b>澳洲机构</b>，也可以找我们。</span>
+          </li>
+        </ul>
+        <a class="more" href="#events">
+          <span class="en">Past events ↓</span>
+          <span class="zh">往期活动 ↓</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="events">
+    <div class="kicker">
+      <span class="en">Events</span>
+      <span class="zh">活动</span>
+    </div>
+    <h2>
+      <span class="en">The bigger rooms.</span>
+      <span class="zh">更大的场子。</span>
+    </h2>
+    <p class="muted">
+      <span class="en">Salons stay small and off the record, so they aren't listed here. These are the public events we've put on with partners.</span>
+      <span class="zh">沙龙保持小规模、不对外公开，所以不在这里列出。以下是我们与合作伙伴一起举办的公开活动。</span>
+    </p>
+
+    <!-- Newest first. To add one, copy an <li> and keep it to a line or two. -->
+    <ul class="events">
+      <li>
+        <div class="when">
+          <span class="en">Sep 2026 · Melbourne</span>
+          <span class="zh">2026.09 · 墨尔本</span>
+        </div>
+        <div>
+          <span class="title">
+            <span class="en">AI Startup Showcase &amp; Networking</span>
+            <span class="zh">AI 创业项目展示交流</span>
+          </span>
+          <span class="note">
+            <span class="en">Early-stage AI founders on stage, co-hosted with the Zhongguancun Science &amp; Technology Entrepreneurs Association and Melbourne partners.</span>
+            <span class="zh">早期 AI 创业项目展示，与中关村科技企业家协会及墨尔本本地伙伴联合主办。</span>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="kicker">
+      <span class="en">Work With Us</span>
+      <span class="zh">合作</span>
+    </div>
+    <h2>
+      <span class="en">Two ways in.</span>
+      <span class="zh">两种方式找到我们。</span>
+    </h2>
+    <div class="paths">
+      <div class="path">
+        <div class="who">
+          <span class="en">Founders, investors, operators</span>
+          <span class="zh">创始人、投资人、操盘手</span>
+        </div>
+        <p>
+          <span class="en">Ask for a seat at a salon. We read every request, and it's how introductions start.</span>
+          <span class="zh">申请参加沙龙。每一份申请我们都会认真看，引荐也从这里开始。</span>
+        </p>
+        <a class="btn" href="/join">
+          <span class="en">Request an invite</span>
+          <span class="zh">申请加入</span>
+        </a>
+      </div>
+      <div class="path">
+        <div class="who">
+          <span class="en">Institutions &amp; partners</span>
+          <span class="zh">机构与合作伙伴</span>
+        </div>
+        <p>
+          <span class="en">Planning something in Australia, or looking for projects here? Tell us what you have in mind.</span>
+          <span class="zh">计划在澳洲办活动，或者想在这里找项目？跟我们说说你的想法。</span>
+        </p>
+        <a class="btn ghost en" href="mailto:stan@newgoldmountain.io?subject=Partnership%20enquiry">Email us</a>
+        <a class="btn ghost zh" href="mailto:stan@newgoldmountain.io?subject=%E5%90%88%E4%BD%9C%E6%B4%BD%E8%B0%88">邮件联系</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="footer-mark" width="26" height="26" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#1e1b16" d="M9 28 L16 25 L16 54 L9 54 Z M48 25 L55 28 L55 54 L48 54 Z M9 49 L55 49 L57 54 L7 54 Z"/>
+    <path fill="#8a6d1f" d="M30.5 9 Q26 33 19.5 49 L32.5 49 Z"/>
+    <path fill="#b08d2f" d="M30.5 9 Q36 32 44.5 49 L32.5 49 Z"/>
+  </svg>
+  <nav class="footer-nav">
+    <a href="/"><span class="en">Home</span><span class="zh">首页</span></a>
+    <a href="/what-we-do"><span class="en">What we do</span><span class="zh">我们做什么</span></a>
+    <a href="/join"><span class="en">Join</span><span class="zh">加入</span></a>
+  </nav>
+  <p>
+    <span class="en">Questions? <a href="mailto:stan@newgoldmountain.io" style="color:var(--gold-deep)">stan@newgoldmountain.io</a></span>
+    <span class="zh">有问题？<a href="mailto:stan@newgoldmountain.io" style="color:var(--gold-deep)">stan@newgoldmountain.io</a></span>
+  </p>
+  <p>© 2026 New Gold Mountain 新金山</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.remove('lang-en', 'lang-zh');
+    document.body.classList.add('lang-' + lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    try { localStorage.setItem('ngm-lang', lang); } catch (e) {}
+  }
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('ngm-lang'); } catch (e) {}
+    var lang = saved || (navigator.language && navigator.language.toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+    setLang(lang);
+  })();
+</script>
+
+</body>
+</html>

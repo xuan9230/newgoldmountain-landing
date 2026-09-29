@@ -255,6 +255,14 @@
     color: var(--ink-soft);
     border-top: 1px solid var(--line);
   }
+  .footer-nav { margin-bottom: 0.8rem; }
+  .footer-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin: 0 0.7rem;
+    border-bottom: 1px solid transparent;
+  }
+  .footer-nav a:hover { color: var(--gold-deep); border-bottom-color: var(--line); }
 </style>
 </head>
 <body class="lang-en">
@@ -390,6 +398,10 @@
 </div>
 
 <footer>
+  <nav class="footer-nav">
+    <a href="/"><span class="en">Home</span><span class="zh">首页</span></a>
+    <a href="/what-we-do"><span class="en">What we do</span><span class="zh">我们做什么</span></a>
+  </nav>
   <p>© 2026 New Gold Mountain 新金山</p>
 </footer>
 

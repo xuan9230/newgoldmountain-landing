@@ -2,11 +2,16 @@
 
 Landing page and join form for the New Gold Mountain community.
 
-Static HTML, no build step. `index.html` is the landing page, `join.html` is the
-signup form. Deployed on Vercel.
+Static HTML, no build step. `index.html` is the landing page, `what-we-do.html`
+explains what we offer (salons, introductions, partner events) and lists past
+events, and `join.html` is the signup form. Deployed on Vercel.
 
-`cleanUrls` is on, so the pages are served at `/` and `/join` — the `.html`
-URLs 308-redirect to those, which keeps any link shared earlier working.
+`cleanUrls` is on, so the pages are served at `/`, `/what-we-do` and `/join` —
+the `.html` URLs 308-redirect to those, which keeps any link shared earlier
+working.
+
+To add a past event, copy an `<li>` in the `events` list in `what-we-do.html`
+(newest first), with both the `en` and `zh` text.
 
 ## Local preview
 
